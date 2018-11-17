@@ -1,0 +1,25 @@
+\chapter{Outras informações}
+
+(I) Metodologia mais usada para diagnóstico de ZIKA - Dengue - Chikungunya
+
+- PCR em tempo real -> Detectável / Não Detectável
+- ELISA (sorologia) -> Reagente / Não Reagente
+
+(II) Informações sobre o GAL e os dados
+- O GAL armazena informações para fazer o seguimento de requisições de amostras suspeitas com doenças como ZIKA - Dengue - Chikungunya. Ele é considerado o Sistema mais importante do SUS pelos dados de "amostras positivas confirmadas" pelos estudos diagnósticos laboratoriais.
+
+- Colunas 
+	(1) Coluna "Cartão SUS" (preenchimento duvidoso)
+	(2) Coluna mais importante "Número de Requisição (NR)" -> desvantagens -> uma pessoa pode entrar mais de um NR dependendo da entrada ao SUS
+		- Exemplo: (6 requisiçõe por pessoa)
+				(Paciente João)	->	NR 1	->	Amostra 1 	->	PCR -> ZIKA
+								->	NR 2	->	Amostra 2 	->	PCR -> Dengue
+								->	NR 3	->	Amostra 3 	->	PCR -> Chikungunya
+								->	NR 4	->	Amostra 4 	->	ELISA -> ZIKA
+								->	NR 5	->	Amostra 5 	->	ELISA -> Dengue
+								->	NR 6	->	Amostra 5 	->	ELISA -> Chikungunya
+
+	(3) Usar mais de uma coluna para referenciar "Nome do Paciente" (preenchido a mão a cada requisição): endereço, nome, documento, etc, diagnóstico (coluna observações)
+		-> Testar os metadados "coluna de observações" minerado pelo Marco
+	(4) Usar "Sistema de Geolocalização" para endereço (testar o minerado pelo Marco)
+	(5) O Macaco (aba macaco) é considerado um "sentinela" para a febre amarela. Pode ser levantado um rastreamento de geolocalização, para ser cruzado com as ocorrências em humanos.

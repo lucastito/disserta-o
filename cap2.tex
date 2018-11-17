@@ -1,6 +1,17 @@
-\chapter{T\'itulo do primeiro cap\'itulo} \label{cap:cap1}
+\chapter{Metodologia}
 
-\section{NOSQL}
-\section{Data Warehouse}
-\section{Bases de Dados Fonte}
-\Section{Modelagem}
+b.	Desenvolver um arcabouço computacional que integre SGWfC, SGBD e WebService aos workflows científicos de bioinformática. Usar ambientes de PAD para executar/analisar esses workflows e as LE no arcabouço.
+c.	Importar os dados (coluna) do GAL para SQL.
+d.	Estabelecer o relacionamento, transformação e limpeza dos dados.
+e.	Levantar as consultas requeridas pelos especialistas e.g., id do paciente, colunas que precisam de limpeza (dados humanos, animais), extração de pacientes por estado, tratamento e transformação de colunas com dados meteorológicos (Tabela 1).
+f.	Integrar os dados do Gal com dados genômicos;
+g.	Adequar os dados genômicos do e.g., Zika para as análises de filodinâmica: informações para a filodinâmica do ZIKV.
+h.	Modelagem dos workflows de filodinâmica, coevolução e redes metabólicas de interação proteína-proteína. A filogenômica considera a representação de um processo evolutivo e podem incluir várias estimações evolutivas relacionadas a datas de divergência, padrões de diversificação, taxonomia e filodinâmica. A filodinâmica visa inferir as taxas de transmissão e disseminação na evolução de organismos patógenos e o seu cálculo dependente dos dados genômicos serem heterogêneos e suficientes. 
+Tabela 1. Consultas SQL propostas
+Tipo de SQL		Quais são os ids de todos os pacientes (cruzar por nome ou identificação)
+	Estatística por estados brasileiros
+	Limpar para obter só dados de humanos
+	Quantos negativos/positivos para os testes clínicos e bioquímicos
+	Qual a origem dos dados genômicos? (cruzar com as tabelas do Gal)
+	Extrair os dados genômicos: dados genômicos completos, parciais
+	Realizar análises de bioinformáticas baseada em dados de proveniência
