@@ -1,0 +1,173 @@
+% --- -----------------------------------------------------------------
+% --- Elementos usados na Capa e na Folha de Rosto.
+% --- EXPRESS�ES ENTRE <> DEVER�O SER COMPLETADAS COM A INFORMA��O ESPEC�FICA DO TRABALHO
+% --- E OS S�MBOLOS <> DEVEM SER RETIRADOS 
+% --- -----------------------------------------------------------------
+\autor{LUCAS DE SOUZA TITO} % deve ser escrito em maiusculo
+
+\titulo{Apoio Computacional na Predi��o Epidemiol�gica e Filodin�mica de Doen�as Infecciosas Emergentes}
+
+\instituicao{UNIVERSIDADE FEDERAL FLUMINENSE}
+
+\orientador{DANIEL CARDOSO MORAES DE OLIVEIRA}
+
+\coorientador{KARY ANN DEL CARMEN OCA�A GAUTHEROT} % se nao existir co-orientador apague essa linha
+
+\local{NITER\'{O}I}
+
+\data{2019} % ano da defesa
+
+\comentario{Disserta��o de Mestrado apresentada ao Programa de P\'{o}s-Gradua\c{c}\~{a}o em Computa\c{c}\~{a}o da \mbox{Universidade} Federal Fluminense como requisito parcial para a obten\c{c}\~{a}o do Grau de \mbox{Mestre em Computa\c{c}\~{a}o}. \'{A}rea de concentra\c{c}\~{a}o: \mbox{Engenharia de Sistemas e Informa��o}} %preencha com a sua area de concentracao
+
+
+% --- -----------------------------------------------------------------
+% --- Capa. (Capa externa, aquela com as letrinhas douradas)(Obrigatorio)
+% --- ----------------------------------------------------------------
+\capa
+
+% --- -----------------------------------------------------------------
+% --- Folha de rosto. (Obrigatorio)
+% --- ----------------------------------------------------------------
+\folhaderosto
+
+
+\pagestyle{ruledheader}
+\setcounter{page}{1}
+\pagenumbering{roman}
+
+% --- -----------------------------------------------------------------
+% --- Termo de aprovacao. (Obrigatorio)
+% --- ----------------------------------------------------------------
+\cleardoublepage
+\thispagestyle{empty}
+
+\vspace{-60mm}
+
+\begin{center}
+   {\large LUCAS DE SOUZA TITO}\\
+   \vspace{7mm}
+
+Apoio Computacional na Predi��o Epidemiol�gica e Filodin�mica de Doen�as Infecciosas Emergentes    \\
+  \vspace{10mm}
+\end{center}
+
+\noindent
+\begin{flushright}
+\begin{minipage}[t]{8cm}
+
+Disserta��o de Mestrado apresentada ao Programa de P\'{o}s-Gradua\c{c}\~{a}o em Computa\c{c}\~{a}o da Universidade Federal Fluminense como requisito parcial para a obten\c{c}\~{a}o do \mbox{Grau} de Mestre em Computa\c{c}\~{a}o. \'{A}rea de concentra\c{c}\~{a}o: \mbox{Engenharia de Sistemas e Informa��o} %preencha com a sua area de concentracao
+
+\end{minipage}
+\end{flushright}
+\vspace{1.0 cm}
+\noindent
+Aprovada em <MES> de <ANO>. \\
+\begin{flushright}
+  \parbox{11cm}
+  {
+  \begin{center}
+  BANCA EXAMINADORA \\
+  \vspace{6mm}
+  \rule{11cm}{.1mm} \\
+    Prof. Daniel Cardoso Moraes de Oliveira - Orientador, IC/UFF \\
+    \vspace{6mm}
+  \rule{11cm}{.1mm} \\
+    Kary Ann del Carmen Oca�a Gautherot, LNCC\\
+    \vspace{6mm}
+  \rule{11cm}{.1mm} \\
+    Prof. <NOME DO AVALIADOR>, <INSTITUI\c{C}\~AO>\\
+  \vspace{4mm}
+  \rule{11cm}{.1mm} \\
+    Prof. <NOME DO AVALIADOR>, <INSTITUI\c{C}\~AO>\\
+    \vspace{6mm}
+  \rule{11cm}{.1mm} \\
+    Prof. <NOME DO AVALIADOR>, <INSTITUI\c{C}\~AO>\\
+  \vspace{6mm}
+  \end{center}
+  }
+\end{flushright}
+\begin{center}
+  \vspace{4mm}
+  Niter\'{o}i \\
+  %\vspace{6mm}
+  2019
+
+\end{center}
+
+% --- -----------------------------------------------------------------
+% --- Dedicatoria.(Opcional)
+% --- -----------------------------------------------------------------
+\cleardoublepage
+\thispagestyle{empty}
+\vspace*{200mm}
+
+\begin{flushright}
+{\em 
+Dedicat�ria(s): Dedico este trabalho a Deus, minha m�e Patr�cia Andrea e ao meu irm�o Caio Vin�cius que s�o os pilares da minha vida e cujo amor funcionou como for�a motriz na realiza��o e conclus�o desta disserta��o.
+}
+\end{flushright}
+\newpage
+
+
+% --- -----------------------------------------------------------------
+% --- Agradecimentos.(Opcional)
+% --- -----------------------------------------------------------------
+\pretextualchapter{Agradecimentos}
+\hspace{5mm}
+Gostaria de agradescer aos meus melhores amigos: Marcelo D'Almeida, Kelly Tavares, Nathan Gerhard, Guilherme Alves, Victor Olimpio, Sandra Fratane, Felipe Santiago, Alexandre Estebanez, Felipe Lug�o Eccard, Rodrigo Rodovalho e Andr� Alvarado por me apoiarem e ajudarem a resolver problemas em c�digo, debugar, configurar ambiente, revisar este trabalho, me ouvirem reclamar da vida ou me obrigarem a sair pra relaxar e n�o perder a cabe�a (n�o necessariamente nessa ordem); ao melhor professor do IC/UFF, meu orientador Daniel de Oliveira, por todos os concelhos, toda a ajuda e principalmente, por toda a paci�ncia comigo quando eu o perturbava; � minha gestora Paula Mian por toda a compreen��o e flexibilidade nos meus hor�rios tornando vi�vel a continuidade do mestrado em paralelo a minhas atividades na Muxi Tecnologia S.A o qual sou grato pelo tempo de empresa e todo o aprendisado adquirido; ao meu av� Florentino mangueira, por compartilhar comigo suas hist�rias, suas experi�ncias de vida e por servir como um grande exemplo de perseveran�a; ao Roberto Carlos Melo, por ajudar na constru��o do meu carater e me auxiliar em diferentes momentos do meu cotidiano; a todos os meus professores e � todas as minhas professoras, do jardim � p�s-gradua��o, que passaram parte dos seus conhecimentos para mim. Tamb�m aos meus colegas e familiares que sempre foram presentes apezar da dist�ncia. Al�m daqueles que encontrei diariamente ao decorrer da minha vida e cujo nome n�o sei ou esqueci (fachineiros, cobradores de �nibus, vendedores ambulantes, porteiros e demais), pessoas que alegraram meu dia, fazendo pouco, sendo educados e respeitosos, oferecendo alguma ajuda por mais singela que pare�a.
+
+% --- -----------------------------------------------------------------
+% --- Resumo em portugues.(Obrigatorio)
+% --- -----------------------------------------------------------------
+\begin{resumo}
+
+Este trabalho apresenta o uso de t�cnicas e ferramentas de data science e e-science em tarefas de pr�-processamento, integra��o, consulta e visualiza��o dos dados como apoio computacional para a predi��o epidemiol�gica e filodin�mica de doen�as infecciosas emergentes como Zika. A principal base de dados utilizada foi extra�da do Sistema Gerenciador de Ambiente Laboratorial (GAL), que quando integrada a outras informa��es permitiu a obten��o de resultados interessantes, dentre eles uma s�rie temporal das doen�as por regi�o.
+
+{\hspace{-8mm} \bf{Palavras-chave}}: Palavras representativas do conte�do do trabalho, isto �, palavras-chave e/ou descritores, conforme a ABNT NBR 6028 (ABNT, 2005).
+
+\end{resumo}
+
+% --- -----------------------------------------------------------------
+% --- Resumo em lingua estrangeira.(Obrigatorio)
+% --- -----------------------------------------------------------------
+\begin{abstract}
+
+This work introduces the use of data science and e-science tools and techniques in preprocessing, integrating, querying and visualizing data as computational support for the epidemiological and philodynamic prediction of emerging infectious diseases such as Zika. The main database has been extracted from the Laboratory Environment Management System (GAL), which it has been integrated with other information allowed to obtain interesting results, among them a time series of diseases by region.
+
+{\hspace{-8mm} \bf{Keywords}}: Palavras representativas do conte�do do trabalho, isto �, palavras-chave e/ou descritores, na l�ngua (ABNT, 2005).
+
+\end{abstract}
+
+% --- -----------------------------------------------------------------
+% --- Lista de figuras.(Opcional)
+% --- -----------------------------------------------------------------
+%\cleardoublepage
+\listoffigures
+
+
+% --- -----------------------------------------------------------------
+% --- Lista de tabelas.(Opcional)
+% --- -----------------------------------------------------------------
+\cleardoublepage
+%\label{pag:last_page_introduction}
+\listoftables
+\cleardoublepage
+
+% --- -----------------------------------------------------------------
+% --- Lista de abreviatura.(Opcional)
+%Elemento opcional, que consiste na rela��o alfab�tica das abreviaturas e siglas utilizadas no texto, seguidas das %palavras ou express�es correspondentes grafadas por extenso. Recomenda-se a elabora��o de lista pr�pria para cada %tipo (ABNT, 2005).
+% --- ----------------------------------------------------------------
+\cleardoublepage
+\pretextualchapter{Lista de Abreviaturas e Siglas}
+\begin{tabular}{lcl}
+<ABREVIATURA> & : & <SIGNIFICADO>;\\
+<ABREVIATURA> & : & <SIGNIFICADO>;\\
+<ABREVIATURA> & : & <SIGNIFICADO>;\\
+\end{tabular}
+% --- -----------------------------------------------------------------
+% --- Sumario.(Obrigatorio)
+% --- -----------------------------------------------------------------
+\pagestyle{ruledheader}
+\tableofcontents
+
+
