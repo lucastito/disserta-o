@@ -1,13 +1,24 @@
 \chapter{Metodologia}
 
-b.	Desenvolver um arcabouço computacional que integre SGWfC, SGBD e WebService aos workflows científicos de bioinformática. Usar ambientes de PAD para executar/analisar esses workflows e as LE no arcabouço.
-c.	Importar os dados (coluna) do GAL para SQL.
-d.	Estabelecer o relacionamento, transformação e limpeza dos dados.
-e.	Levantar as consultas requeridas pelos especialistas e.g., id do paciente, colunas que precisam de limpeza (dados humanos, animais), extração de pacientes por estado, tratamento e transformação de colunas com dados meteorológicos (Tabela 1).
-f.	Integrar os dados do Gal com dados genômicos;
-g.	Adequar os dados genômicos do e.g., Zika para as análises de filodinâmica: informações para a filodinâmica do ZIKV.
-h.	Modelagem dos workflows de filodinâmica, coevolução e redes metabólicas de interação proteína-proteína. A filogenômica considera a representação de um processo evolutivo e podem incluir várias estimações evolutivas relacionadas a datas de divergência, padrões de diversificação, taxonomia e filodinâmica. A filodinâmica visa inferir as taxas de transmissão e disseminação na evolução de organismos patógenos e o seu cálculo dependente dos dados genômicos serem heterogêneos e suficientes. 
-Tabela 1. Consultas SQL propostas
+I.	Importar os dados do GAL.
+II.	Estabelecer o relacionamento, transformação e limpeza dos dados.
+III.	Integrar os dados do Gal com dados genômicos.
+IV.	Integrar os dados com bases geográficas.
+V.	Levantar as consultas requeridas pelos especialistas.
+VI.	exibir o resultado das consultas para o pesquisador por meio da visualização de dados.
+
+
+Quais são os ids de todos os pacientes (cruzar por nome ou identificação)
+	Estatística por estados brasileiros
+	Limpar para obter só dados de humanos
+	Quantos negativos/positivos para os testes clínicos e bioquímicos
+	Qual a origem dos dados genômicos? (cruzar com as tabelas do Gal)
+	Extrair os dados genômicos: dados genômicos completos, parciais
+	Realizar análises de bioinformáticas baseada em dados de proveniência
+
+
+---
+
 Tipo de SQL		Quais são os ids de todos os pacientes (cruzar por nome ou identificação)
 	Estatística por estados brasileiros
 	Limpar para obter só dados de humanos
@@ -15,3 +26,40 @@ Tipo de SQL		Quais são os ids de todos os pacientes (cruzar por nome ou iden
 	Qual a origem dos dados genômicos? (cruzar com as tabelas do Gal)
 	Extrair os dados genômicos: dados genômicos completos, parciais
 	Realizar análises de bioinformáticas baseada em dados de proveniência
+
+
+- Ideias para aplicação da pesquisa do GAL
+
+	(1) Serie temporais -> para o rastreamento de amostras (estudo epidemiológico para o apoio do SUS)
+	(2) Qual a linha de tendência do Zika no RJ? 
+		- Separar doenças por mês, por estado, por região?
+		- Separar por doenças (metadados da "coluna de observações", minerada pelo Marco)
+		- Cálculo da taxa de confirmação (= total / confirmados)
+	(3) Dados do Gal no surto de 2015 - 2018, aproximandamente 20,000 linhas
+
+	-----
+	
+	
+(I) Metodologia mais usada para diagnóstico de ZIKA - Dengue - Chikungunya
+
+- PCR em tempo real -> Detectável / Não Detectável
+- ELISA (sorologia) -> Reagente / Não Reagente
+
+(II) Informações sobre o GAL e os dados
+- O GAL armazena informações para fazer o seguimento de requisições de amostras suspeitas com doenças como ZIKA - Dengue - Chikungunya. Ele é considerado o Sistema mais importante do SUS pelos dados de "amostras positivas confirmadas" pelos estudos diagnósticos laboratoriais.
+
+- Colunas 
+	(1) Coluna "Cartão SUS" (preenchimento duvidoso)
+	(2) Coluna mais importante "Número de Requisição (NR)" -> desvantagens -> uma pessoa pode entrar mais de um NR dependendo da entrada ao SUS
+		- Exemplo: (6 requisiçõe por pessoa)
+				(Paciente João)	->	NR 1	->	Amostra 1 	->	PCR -> ZIKA
+								->	NR 2	->	Amostra 2 	->	PCR -> Dengue
+								->	NR 3	->	Amostra 3 	->	PCR -> Chikungunya
+								->	NR 4	->	Amostra 4 	->	ELISA -> ZIKA
+								->	NR 5	->	Amostra 5 	->	ELISA -> Dengue
+								->	NR 6	->	Amostra 5 	->	ELISA -> Chikungunya
+
+	(3) Usar mais de uma coluna para referenciar "Nome do Paciente" (preenchido a mão a cada requisição): endereço, nome, documento, etc, diagnóstico (coluna observações)
+		-> Testar os metadados "coluna de observações" minerado pelo Marco
+	(4) Usar "Sistema de Geolocalização" para endereço (testar o minerado pelo Marco)
+	(5) O Macaco (aba macaco) é considerado um "sentinela" para a febre amarela. Pode ser levantado um rastreamento de geolocalização, para ser cruzado com as ocorrências em humanos.

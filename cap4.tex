@@ -1,25 +1,34 @@
-\chapter{Outras informações}
+\chapter{Integração dos Dados}
 
-(I) Metodologia mais usada para diagnóstico de ZIKA - Dengue - Chikungunya
+Por muitos anos, Data warehousing tem sido a abordagem padrão para a análise de dados. Essa abordagem requer esquemas razoavelmente rígidos além de necessitar que os dados sejam compreendidos, extraídos, transformados e carregados para o armazém em uma etapa denominada ETL. As análises que são criadas unicamente no data warehouse tradicional dificultam o tratamento de dados que não estão em conformidade com um esquema bem definido, porque esses dados geralmente são descartados e perdidos.
+O volume de dados cresce vertiginosamente. Estima-se por exemplo que em 2020, a quantidade de dados não estruturados deverá ser em torno de 44 ZB \cite{turner2014digital}.
+Dessa forma, os conjuntos de dados passaram a ter tal tamanho e estrutura que excedem as capacidades das ferramentas de programação tradicionais para coleta, armazenamento e processamento de dados em um tempo razoável e por motivos de força maior, excedem a capacidade de sua percepção por um humano \cite{miloslavskaya2014information}.
+Ademais, tecnologias de big data requerem as seguintes características \cite{miloslavskaya2016big}:
+Precisão: os dados precisam estar corretos e terem sido obtidos de uma fonte confiável.
+Conveniência: os dados devem estar atualizados e se necessário, os dados históricos devem ser adicionados no devido tempo.
+Abrangência: os dados precisam ser coletados em um modelo que produza uma imagem completa, seja flexível e integrado e facilmente destilado em informações úteis.
+Adaptabilidade: os dados devem ser adaptados a um objetivo específico.
+Relevância: os dados devem ser aplicáveis ​​e reais para a organização que os utiliza.
+Observando as disparidades supramencionadas, temos que os critérios que determinam a diferença entre as abordagens tradicionais como Data Warehouse de abordagens de Big Data são os 7V: Volume, Velocidade, Variedade, Veracidade, Variabilidade, Valor e Visibilidade.
+Uma tecnologia recente de Big Data que tem mostrado bons resultados são os Data Lakes.
 
-- PCR em tempo real -> Detectável / Não Detectável
-- ELISA (sorologia) -> Reagente / Não Reagente
+\section{Data Lake}
 
-(II) Informações sobre o GAL e os dados
-- O GAL armazena informações para fazer o seguimento de requisições de amostras suspeitas com doenças como ZIKA - Dengue - Chikungunya. Ele é considerado o Sistema mais importante do SUS pelos dados de "amostras positivas confirmadas" pelos estudos diagnósticos laboratoriais.
+Um data lake é um repositório centralizado que permite armazenar todos os  dados estruturados, semiestruturados e não estruturados em qualquer escala. O armazenamento é feito no formato natural dos dados \cite{laskowski2016data}.
+Um Data Lake possui as seguintes etapas.
+• Injeção de dados: Os Data Lakes permitem que importar qualquer quantidade de dados que possa vir em tempo real. Os dados são coletados de várias fontes e movidos para o lago de dados em seu formato original. Esse processo permite que você dimensione para dados de qualquer tamanho, economizando tempo de definição de estruturas de dados, esquemas e transformações.
+• Armazenar: depois de recuperados, os dados precisam ser armazenados em um formato durável e facilmente acessível.
+• Processar e analisar: nessa etapa, os dados são transformados de brutos em informações acionáveis.
+• Explorar e visualizar: a etapa final é a de conversão dos resultados da análise em um formato que facilite a extração de informações e o compartilhamento com os colegas.
 
-- Colunas 
-	(1) Coluna "Cartão SUS" (preenchimento duvidoso)
-	(2) Coluna mais importante "Número de Requisição (NR)" -> desvantagens -> uma pessoa pode entrar mais de um NR dependendo da entrada ao SUS
-		- Exemplo: (6 requisiçõe por pessoa)
-				(Paciente João)	->	NR 1	->	Amostra 1 	->	PCR -> ZIKA
-								->	NR 2	->	Amostra 2 	->	PCR -> Dengue
-								->	NR 3	->	Amostra 3 	->	PCR -> Chikungunya
-								->	NR 4	->	Amostra 4 	->	ELISA -> ZIKA
-								->	NR 5	->	Amostra 5 	->	ELISA -> Dengue
-								->	NR 6	->	Amostra 5 	->	ELISA -> Chikungunya
+Note que mover os dados de um armazenamento em Data WareHouse ou outras abordagens para a abordagem "armazenar tudo" de um  Data Lake é útil somente se ainda for possível extrair conhecimento de todos os dados.
+Vale ressaltar que o principal desafio de uma arquitetura de Data Lake é que os dados brutos são armazenados sem supervisão do conteúdo.
+existem várias ferramentas para data lake, como: Google Cloud Platform \ref{https://cloud.google.com/solutions/build-a-data-lake-on-gcp?hl=pt-br}{GCP}, \ref{https://aws.amazon.com/pt/big-data/datalakes-and-analytics/what-is-a-data-lake/?nc1=h_ls}{AWS}, \ref{https://azure.microsoft.com/pt-br/services/storage/data-lake-storage/}{Azure}.  Além de fornecer funcionalidades de Data Lake, estas ferramentas possibilitam o uso de mineração de dados, aprendizado de máquina e diversos outros recursos integrados.
+Neste trabalho, utilizaremos o \ref{https://drill.apache.org/}{Apache Drill} para integrar os dados, nos valendo do conceito já apresentado de Data Lake.
 
-	(3) Usar mais de uma coluna para referenciar "Nome do Paciente" (preenchido a mão a cada requisição): endereço, nome, documento, etc, diagnóstico (coluna observações)
-		-> Testar os metadados "coluna de observações" minerado pelo Marco
-	(4) Usar "Sistema de Geolocalização" para endereço (testar o minerado pelo Marco)
-	(5) O Macaco (aba macaco) é considerado um "sentinela" para a febre amarela. Pode ser levantado um rastreamento de geolocalização, para ser cruzado com as ocorrências em humanos.
+\section{Apache Drill}
+
+O Apache Drill é um sistema distribuído gratuito e de código aberto, para análise ad-hoc interativa de conjuntos de dados de grande escala. Projetado para lidar com até
+petabytes de dados espalhados por milhares de servidores, seu objetivo é responder a consultas ad-hoc em uma latência baixa.
+A arquitetura do drill possui basicamente 3 camadas: usuário, processamento e fonte de dados.
+A camada de usuário provê acesso aos dados por meio de interfaces (linha de comando, REST, API e drivers JDBC/ODBC). A camada de processamento permite plugar ou extender linguagens de consulta. Na camada dos dados, configura-se  o acesso as fontes de dado, local e/ou clusterizada. Essas fontes podem ser estruturadas, semiestruturadas ou não estruturadas. \cite{hausenblas2013apache}.

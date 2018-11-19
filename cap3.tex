@@ -1,18 +1,20 @@
-\chapter{Consultas}
-Tipo de SQL		Quais são os ids de todos os pacientes (cruzar por nome ou identificação)
-	Estatística por estados brasileiros
-	Limpar para obter só dados de humanos
-	Quantos negativos/positivos para os testes clínicos e bioquímicos
-	Qual a origem dos dados genômicos? (cruzar com as tabelas do Gal)
-	Extrair os dados genômicos: dados genômicos completos, parciais
-	Realizar análises de bioinformáticas baseada em dados de proveniência
+﻿\chapter{Pré-Processamento}
+
+%por definição de preprocessamento
+
+Como mencionado no capítulo anterior, para este trabalho, as fontes de dados extraídas foram:
+1 planílha do excel exportada pelo GAL contendo duas folhas. A primeira com dados de humanos e a segunda com dados de macacos. Dessas, somente a primeira foi utilizada.
+2 base de dados genômica
 
 
-- Ideias para aplicação da pesquisa do GAL
+As tarefas de manipulação dos dados na etapa inicial de pré-processamento dos dados foi feita na linguagem python por meio da biblioteca \ref{https://pandas.pydata.org/}{Pandas} e o pacote \ref{http://www.numpy.org/}{NumPy}, que juntas são atualmente algumas das ferramentas mais conhecidas e poderosas em data science.
 
-	(1) Serie temporais -> para o rastreamento de amostras (estudo epidemiológico para o apoio do SUS)
-	(2) Qual a linha de tendência do Zika no RJ? 
-		- Separar doenças por mês, por estado, por região?
-		- Separar por doenças (metadados da "coluna de observações", minerada pelo Marco)
-		- Cálculo da taxa de confirmação (= total / confirmados)
-	(3) Dados do Gal no surto de 2015 - 2018, aproximandamente 20,000 linhas
+Record Linkage
+
+O termo record linkage é usado para indicar o procedimento de reunir informações de dois ou mais registros que se acredita pertencerem à mesma entidade.
+Esse processo é usado para vincular dados de várias fontes de dados ou para encontrar duplicatas em uma única fonte de dados.
+Na ciência da computação, record linkage também é conhecido como data matching ou deduplication(no caso de registros duplicados de pesquisa em um único arquivo).
+Em record linkage, os atributos da entidade (armazenados em um registro) são usados para vincular dois ou mais registros.
+Atributos podem ser identificadores exclusivos da entidade como o código da pessoa física (CPF) ou o número do registro geral (RG), mas também existem atributos como nome, data de nascimento, modelo do carro e endereço que podem ser utilizados.
+O procedimento de record linkage pode ser representado como um fluxo de trabalho com as seguintes etapas: limpeza, indexação, comparação, classificação e avaliação. Se necessário, os pares de registros classificados fluem de volta para melhorar o passo anterior \cite{christen2012data}.
+A biblioteca \ref{https://recordlinkage.readthedocs.io/en/latest/index.html}{Record Linkage Toolkit} foi utilizada para o processo de deduplicação na base extraída do GAL. Juntamente com o Pandas e o NumPy, possibilitou a criação de uma base limpa e consistente para a etapa de integração descrita no capítulo seguinte.
