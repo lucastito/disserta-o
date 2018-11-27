@@ -1,65 +1,61 @@
-\chapter{Metodologia}
+\chapter{Referencial Teórico}
 
-I.	Importar os dados do GAL.
-II.	Estabelecer o relacionamento, transformação e limpeza dos dados.
-III.	Integrar os dados do Gal com dados genômicos.
-IV.	Integrar os dados com bases geográficas.
-V.	Levantar as consultas requeridas pelos especialistas.
-VI.	exibir o resultado das consultas para o pesquisador por meio da visualização de dados.
+\section{Data Science}
+\section{E-Science}
 
-
-Quais são os ids de todos os pacientes (cruzar por nome ou identificação)
----	Estatística por estados brasileiros
----	Limpar para obter só dados de humanos
----	Quantos negativos/positivos para os testes clínicos e bioquímicos
----	Qual a origem dos dados genômicos? (cruzar com as tabelas do Gal)
----	Extrair os dados genômicos: dados genômicos completos, parciais
----	Realizar análises de bioinformáticas baseada em dados de proveniência
+\section{Integração de Dados}
+O processo de integração de dados heterogêneos era frequentemente realizado pela abordagem virtual \cite{chawathe1994tsimmis} ou pela abordagem materializada \cite{Widom:1995:RPD:221270.221319}.
+Na abordagem virtual os dados permanecem em fontes separadas e são integrados via consulta. Como pode-se observar na figura \ref{fig1}, a arquitetura dessa abordagem requer diferentes componentes. A aplicação envia consultas, que são interceptadas pelos mediadores, cuja função é direcionar para o tradutor correto, que por sua vez identifica a fonte de dados correta e efetivamente encontra a informação desejada. Caso a informação seja um dado bruto não estruturado, é requerido um classificador e extrator para a obtenção dos dados chave que representem a informação. O mediador é responsável ainda por unificar os resultados das consultas e trata-los se necessário. Os autores acreditam que pode haver um template para esses mediadores, de forma que os mesmos sejam gerados semiautomática ou automaticamente. Essa hipótese é exemplificada pelo gerador de mediadores e gerador de tradutores que devem ter esse papel.
+A abordagem materializada por sua vez, possui além das fontes de dados, um empacotador que traduz as informações das fontes e um monitor que analisa a mudança nas fontes (novas fontes plugadas ou informações novas salvas em uma fonte). Em seguida os dados tratados são direcionados para o integrador que mescla os dados e os envia para um banco de dados centralizado, chamado de  data warehouse. A arquitetura dessa abordagem pode ser analisada na \ref{fig2}.
 
 
----
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.3\linewidth]{figuras/TSIMMIS.png}
+\caption{Abordagem virtual. Essa figura foi retirada e traduzida do artigo \cite{chawathe1994tsimmis}}
+\label{fig1}
+\end{figure}
 
-Tipo de SQL	- Quais são os ids de todos os pacientes (cruzar por nome ou identificação)
----	Estatística por estados brasileiros
----	Limpar para obter só dados de humanos
----	Quantos negativos/positivos para os testes clínicos e bioquímicos
----	Qual a origem dos dados genômicos? (cruzar com as tabelas do Gal)
----	Extrair os dados genômicos: dados genômicos completos, parciais
----	Realizar análises de bioinformáticas baseada em dados de proveniência
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.3\linewidth]{figuras/DW.png}
+\caption{Abordagem materializada com Data Warehouse. Essa figura foi retirada e traduzida do artigo \cite{Widom:1995:RPD:221270.221319}}
+\label{fig2}
+\end{figure}
 
+No entanto, o volume de dados cresce vertiginosamente. Estima-se por exemplo que em 2020, a quantidade de dados não estruturados deverá ser em torno de 44 ZB \cite{turner2014digital}.
+Dessa forma, os conjuntos de dados passaram a ter tal tamanho e estrutura que excedem as capacidades das ferramentas de programação tradicionais para coleta, armazenamento e processamento de dados em um tempo razoável e por motivos de força maior, excedem a capacidade de sua percepção por um humano \cite{miloslavskaya2014information}. Esses fatos invibializam as abordagens descritas anteriormente em um cenário de Big Data. Os critérios que determinam a diferença entre as abordagens tradicionais (virtual e materializada) de abordagens de Big Data são os 7V: Volume, Velocidade, Variedade, Veracidade, Variabilidade, Valor e Visibilidade.
 
-- Ideias para aplicação da pesquisa do GAL
+\subsection{Data Warehouse}
+Data Warehouses são bancos de dados centralizados que requerem que seus esquemas sejam definidos previamente, visto que os dados devem ser compreendidos para em seguida passar pela etapa de ETL (extração, transformação e carga).
 
-	(1) Serie temporais -> para o rastreamento de amostras (estudo epidemiológico para o apoio do SUS)
-	(2) Qual a linha de tendência do Zika no RJ? 
-		- Separar doenças por mês, por estado, por região?
-		- Separar por doenças (metadados da "coluna de observações", minerada pelo Marco)
-		- Cálculo da taxa de confirmação (= total / confirmados)
-	(3) Dados do Gal no surto de 2015 - 2018, aproximandamente 20,000 linhas
+\subsection{Data Lake}
+Uma tecnologia recente de Big Data que tem mostrado bons resultados são os Data Lakes.
+Um data lake é um repositório centralizado que permite armazenar todos os  dados estruturados, semiestruturados e não estruturados em qualquer escala. O armazenamento é feito no formato natural dos dados \cite{laskowski2016data}. Como exemplificado na figura \ref{fig3}, a preocupação é armazenar todos os dados, sem perda, para posterior exploração.
 
-	-----
-	
-	
-(I) Metodologia mais usada para diagnóstico de ZIKA - Dengue - Chikungunya
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.3\linewidth]{figuras/DL.png}
+\caption{Fluxo de um Data Lake}
+\label{fig3}
+\end{figure}
 
-- PCR em tempo real -> Detectável / Não Detectável
-- ELISA (sorologia) -> Reagente / Não Reagente
+Um Data Lake possui as seguintes etapas:
+• Injeção de dados: Os Data Lakes permitem que importar qualquer quantidade de dados que possa vir em tempo real. Os dados são coletados de várias fontes e movidos para o lago de dados em seu formato original. Esse processo permite que você dimensione para dados de qualquer tamanho, economizando tempo de definição de estruturas de dados, esquemas e transformações.
+• Armazenar: depois de recuperados, os dados precisam ser armazenados em um formato durável e facilmente acessível.
+• Processar e analisar: nessa etapa, os dados são transformados de brutos em informações acionáveis.
+• Explorar e visualizar: a etapa final é a de conversão dos resultados da análise em um formato que facilite a extração de informações e o compartilhamento com os colegas.
 
-(II) Informações sobre o GAL e os dados
-- O GAL armazena informações para fazer o seguimento de requisições de amostras suspeitas com doenças como ZIKA - Dengue - Chikungunya. Ele é considerado o Sistema mais importante do SUS pelos dados de "amostras positivas confirmadas" pelos estudos diagnósticos laboratoriais.
+Note que mover os dados de um armazenamento em Data WareHouse ou outras abordagens para a abordagem "armazenar tudo" de um  Data Lake é útil somente se ainda for possível extrair conhecimento de todos os dados.
+Vale ressaltar que o principal desafio de uma arquitetura de Data Lake é que os dados brutos são armazenados sem supervisão do conteúdo.
+existem várias ferramentas para data lake, como: Google Cloud Platform \ref{https://cloud.google.com/solutions/build-a-data-lake-on-gcp?hl=pt-br}{GCP}, \ref{https://aws.amazon.com/pt/big-data/datalakes-and-analytics/what-is-a-data-lake/?nc1=h_ls}{AWS}, \ref{https://azure.microsoft.com/pt-br/services/storage/data-lake-storage/}{Azure}.  Além de fornecer funcionalidades de Data Lake, estas ferramentas possibilitam o uso de mineração de dados, aprendizado de máquina e diversos outros recursos integrados.
+Neste trabalho, utilizaremos o \ref{https://drill.apache.org/}{Apache Drill} para integrar os dados, nos valendo do conceito já apresentado de Data Lake.
 
-- Colunas 
-	(1) Coluna "Cartão SUS" (preenchimento duvidoso)
-	(2) Coluna mais importante "Número de Requisição (NR)" -> desvantagens -> uma pessoa pode entrar mais de um NR dependendo da entrada ao SUS
-		- Exemplo: (6 requisiçõe por pessoa)
-				(Paciente João)	->	NR 1	->	Amostra 1 	->	PCR -> ZIKA
-								->	NR 2	->	Amostra 2 	->	PCR -> Dengue
-								->	NR 3	->	Amostra 3 	->	PCR -> Chikungunya
-								->	NR 4	->	Amostra 4 	->	ELISA -> ZIKA
-								->	NR 5	->	Amostra 5 	->	ELISA -> Dengue
-								->	NR 6	->	Amostra 5 	->	ELISA -> Chikungunya
+\section{Record Linkage}
 
-	(3) Usar mais de uma coluna para referenciar "Nome do Paciente" (preenchido a mão a cada requisição): endereço, nome, documento, etc, diagnóstico (coluna observações)
-		-> Testar os metadados "coluna de observações" minerado pelo Marco
-	(4) Usar "Sistema de Geolocalização" para endereço (testar o minerado pelo Marco)
-	(5) O Macaco (aba macaco) é considerado um "sentinela" para a febre amarela. Pode ser levantado um rastreamento de geolocalização, para ser cruzado com as ocorrências em humanos.
+O termo record linkage é usado para indicar o procedimento de reunir informações de dois ou mais registros que se acredita pertencerem à mesma entidade.
+Esse processo é usado para vincular dados de várias fontes de dados ou para encontrar duplicatas em uma única fonte de dados.
+Na ciência da computação, record linkage também é conhecido como data matching ou deduplication(no caso de registros duplicados de pesquisa em um único arquivo).
+Em record linkage, os atributos da entidade (armazenados em um registro) são usados para vincular dois ou mais registros.
+Atributos podem ser identificadores exclusivos da entidade como o código da pessoa física (CPF) ou o número do registro geral (RG), mas também existem atributos como nome, data de nascimento, modelo do carro e endereço que podem ser utilizados.
+O procedimento de record linkage pode ser representado como um fluxo de trabalho com as seguintes etapas: limpeza, indexação, comparação, classificação e avaliação. Se necessário, os pares de registros classificados fluem de volta para melhorar o passo anterior \cite{christen2012data}.
