@@ -1,13 +1,83 @@
 \chapter{Referencial Teórico}
+\section{Biologia}
 
-\section{Data Science}
-\section{E-Science}
+Arbovírus refere-se a um vírus que é essencialmente transmitido ao homem por vetores artrópodes, como os mosquitos.
+termo arbovírus não é incluído na classificação taxonômica de vírus
+%%é ou não vírus?
+%%zika é né? febre amarela também?
+%% o que são Flavivírus? são tipos de arbovirus? ou ao contrário?
+%%so ao homem?
 
-\section{Integração de Dados}
-O processo de integração de dados heterogêneos era frequentemente realizado pela abordagem virtual \cite{chawathe1994tsimmis} ou pela abordagem materializada \cite{Widom:1995:RPD:221270.221319}.
-Na abordagem virtual os dados permanecem em fontes separadas e são integrados via consulta. Como pode-se observar na figura \ref{fig1}, a arquitetura dessa abordagem requer diferentes componentes. A aplicação envia consultas, que são interceptadas pelos mediadores, cuja função é direcionar para o tradutor correto, que por sua vez identifica a fonte de dados correta e efetivamente encontra a informação desejada. Caso a informação seja um dado bruto não estruturado, é requerido um classificador e extrator para a obtenção dos dados chave que representem a informação. O mediador é responsável ainda por unificar os resultados das consultas e trata-los se necessário. Os autores acreditam que pode haver um template para esses mediadores, de forma que os mesmos sejam gerados semiautomática ou automaticamente. Essa hipótese é exemplificada pelo gerador de mediadores e gerador de tradutores que devem ter esse papel.
-A abordagem materializada por sua vez, possui além das fontes de dados, um empacotador que traduz as informações das fontes e um monitor que analisa a mudança nas fontes (novas fontes plugadas ou informações novas salvas em uma fonte). Em seguida os dados tratados são direcionados para o integrador que mescla os dados e os envia para um banco de dados centralizado, chamado de  data warehouse. A arquitetura dessa abordagem pode ser analisada na \ref{fig2}.
+Patógenos são organismos capazes de causar doença em um hospedeiro. São exemplos de patóginos bactérias, vírus, fungos e protozoários.
+%%qual diferença de patologia e infectologia e epideumologia?
 
+PCR (Polymerase chain Reaction) é uma técnica molecular que consiste na detecção e amplificação in vitro (procedimento feito em laboratórios) de regiões específicas de ácidos nucléicos (DNA ou cDNA) (TYRRELL, 1997). Para o uso dessa técnica é necessária uma amostra, que está relacionada a fonte do material que deseja-se amplificar, podendo ser sangue, biopsia de qualquer tecido, cabelo, unha, líquidos corpóreos, entre outros. O resultado desse procedimento pode ser observado de duas formas, eletroforese ou em tempo real. A eletroforese trata-se de um processo de migração de uma partícula carregada sob influência de um campo elétrico, visto que as moléculas adquirem carga positiva ou negativa em um determinado PH, por apresentarem grupos funcionais ionizáveis (WILSON; WALKER, 2010).
+O RT-PCR por sua vez, permite monitorar em tempo real, o processo de amplificação e quantificar os ácidos nucléicos por meio da emissão e capitação de fluorescência que ocorre durante todo o processo.
+A emissão da fluorescência gera um sinal que aumenta na proporção direta da quantidade de produto da PCR (NOVAIS; PIRES-ALVES, 2004).
+The polymerase chain reaction is a way of “amplifying” or making multiple copies of any desired piece of nucleic acid. It was first used to make copies of all or part of the DNA of genes. 1 shows the principal steps in the procedure. Firstly, a double strand of DNA is separated into two single 
+%%Os ensaios de PCR em Tempo Real são muito mais sensíveis, específicos e rápidos, principalmente quando comparados aos testes convencionais, levando de 2 a 3 horas para emitir o resultado.
+Para diagnósticos, são amplamente utilizados na infectologia clínica para a detecção de patógenos, identificando infecções virais e bacterianas, em que a cultura dos agentes causadores pode ser muito difícil ou até mesmo impossível. Este método não depende do isolamento ou crescimento do patógeno ou da detecção de uma resposta imune contra o agente.
+
+A técnica de enzimaimunoensaio (ELISA - Enzyme-Linked Immunosorbent Assay) é um método quantitativo em que a reação de antígeno-anticorpo é monitorizada por medida da atividade enzimática. O ensaio é detectado por leitura visual ou fotométrica, apresentando como vantagens, baixo custo, rapidez, automação, especificidade e elevada sensibilidade. Classificou-se a técnica de ELISA em dois tipos: homogêneo e heterogêneo. O ensaio homogêneo é utilizado para a detecção de antígenos de baixo peso molecular como drogas, hormônios e agentes antimicrobianos. Já o teste do tipo heterogêneo é utilizado para a detecção de moléculas maiores.
+%%so soro? o que é soro?
+
+inoculação em cultura de células Vero (derivadas de rim de macacos) é um método amplamente usado em estudos sobre atividade viral no caso da família dos flavivírus, à qual pertencem os vírus Zika e dengue. Ela é recomendada para identificar se o vírus está ativo (capaz de causar infecção em vertebrados). Em relação às amostras de saliva, foi usada apenas a técnica de inoculação em células Vero, uma vez que o baixo volume de saliva expelida pelo vetor não permitiria a aplicação de uma segunda técnica.
+%% celulas vero so saliva?
+
+metodologia
+'RT-PCR em tempo real'
+'Enzimaimunoensaio'
+'Inoculação em células C6/36'
+'Inoculação em células Vero'
+
+
+material
+%%material é do patógeno ou do hospedeiro?
+'Soro'
+'Urina'
+'Fragmento do tecido do SNC - cérebro'
+'Fragmentos de coração'
+'Fragmentos de fígado'
+'Fragmentos de rim'
+'Fragmentos de pulmão'
+'Líquido Amniótico'
+'Sangue'
+'Peça anatômica'
+'Líquido'
+'Fragmentos de baço'
+'Fragmento'
+'Fragmento de Placenta'
+'Fragmento de Cordão Umbilical'
+'Sangue do Cordão Umbilical'
+'Líquor'
+'Leite Materno'
+'Urina 1º jato'
+'Sangue total'
+'Sangue com EDTA'
+'Tecido'
+'Saliva'
+'Plasma'
+'Secreção mamária'
+'Vísceras'
+
+\section{Bioinformática e Data Science}
+
+A bioinformática de um modo geral visa o apoio à gerência, tratamento, análise, integração, e interpretação da informação dos dados biológicos de diversos experimentos em larga escala. Por sua vez, Data Science é um campo interdisciplinar que utiliza métodos, processos, algoritmos e sistemas científicos para extrair conhecimento e insights de dados em várias formas, tanto estruturadas quanto não estruturadas \cite{dhar2013data}. As etapas em Data Science são: obtenção dos dados, processamento, exploração e análise. A união de ambas as áreas permite a descoberta de informações cruciais para a manutenção da sociedade de uma forma sistemática e confiável.
+
+\section{Processamento dos Dados}
+
+Os dados são fontes de informações ricas, que no entanto em seu estado bruto podem dificultar a etapa de análise e obtenção de informações relevantes. A fim de melhorar a acurácia de algoritmos ou de facilitar a exploração por cientístas, é aplicada uma etapa de tratamento e processamento dos dados, de forma a remover ou minimizar problemas comuns como: dados faltantes, dados inconcistentes ou ambíguos, erro no intervalo dos dados, formatação incorreta dos dados e muitos outros problemas.
+Essa etapa pode ser aplicada antes da análise dos dados (pré-processamento) ou após (pós-processamento). Uma das técnicas de processamento que pode ser utilizada é Record Linkage.
+
+\subsection{Record Linkage}
+
+O termo record linkage é usado para indicar o procedimento de reunir informações de dois ou mais registros que se acredita pertencerem à mesma entidade. Esse processo pode ser classificado em deduplication, que é encontrar duplicatas em uma mesma base de dados, ou em data matching, que é o processo de vincular registros que encontram-se em diferentes fontes.
+Cada registro possui um conjunto de atributos que podem ser identificadores exclusivos da entidade como o código da pessoa física (CPF) ou o número do registro geral (RG), mas também existem atributos não identificadores, como nome, data de nascimento, modelo do carro e endereço que podem ser utilizados no processo de record linkage. Esse processo pode ser representado como um fluxo de trabalho com as seguintes etapas: limpeza, indexação, comparação, classificação e avaliação. Se necessário, os pares de registros classificados fluem de volta para melhorar o passo anterior \cite{christen2012data}.
+
+\section{Integração dos Dados}
+O processo de integração de dados heterogêneos pode ser realizado por diferentes abordagens, virtual \cite{chawathe1994tsimmis} ou materializada \cite{Widom:1995:RPD:221270.221319}.
+Na abordagem virtual os dados permanecem em fontes separadas e são integrados via consulta. A figura \ref{fig1} apresenta uma das primeiras arquiteturas propostas para esse cenário. Nela são requeridos diferentes componentes. A aplicação envia consultas, que são interceptadas pelos mediadores, cuja função é direcionar para o tradutor correto, que por sua vez identifica a fonte de dados correta e efetivamente encontra a informação desejada. Caso a informação seja um dado bruto não estruturado, é requerido um classificador e extrator para a obtenção dos dados chave que representem a informação. O mediador é responsável ainda por unificar os resultados das consultas e trata-los se necessário. Os autores acreditam que pode haver um template para esses mediadores, de forma que os mesmos sejam gerados semiautomática ou automaticamente. Essa hipótese é exemplificada pelo gerador de mediadores e gerador de tradutores que devem ter esse papel.
+A abordagem materializada por sua vez, possui além das fontes de dados, um empacotador que traduz as informações das fontes e um monitor que analisa a mudança das informações, visto que novas fontes podem ser plugadas ou informações novas podem ser salvas em uma fonte já existente. Em seguida os dados tratados são direcionados para o integrador que mescla os dados e os envia para um banco de dados centralizado, chamado de  data warehouse. Data Warehouse é um banco de dados centralizado que requerem que seus esquema seja definido previamente, já que os dados devem ser compreendidos para em seguida passar pela etapa de ETL (extração, transformação e carga). Essa etapa pode ser feita programaticamente, ou seja, de forma automatizada por um programa específico desenvolvido para esse fim ou semi-automatizada, ou seja, de maneira supervisionada por humanos com um apoio de ferramentas mais genéricas como DataStage da IBM \url{https://www.ibm.com/us-en/marketplace/datastage}. A arquitetura dessa abordagem pode ser analisada na \ref{fig2}.
 
 \begin{figure}[!ht]
 \centering
@@ -24,14 +94,12 @@ A abordagem materializada por sua vez, possui além das fontes de dados, um empa
 \end{figure}
 
 No entanto, o volume de dados cresce vertiginosamente. Estima-se por exemplo que em 2020, a quantidade de dados não estruturados deverá ser em torno de 44 ZB \cite{turner2014digital}.
-Dessa forma, os conjuntos de dados passaram a ter tal tamanho e estrutura que excedem as capacidades das ferramentas de programação tradicionais para coleta, armazenamento e processamento de dados em um tempo razoável e por motivos de força maior, excedem a capacidade de sua percepção por um humano \cite{miloslavskaya2014information}. Esses fatos invibializam as abordagens descritas anteriormente em um cenário de Big Data. Os critérios que determinam a diferença entre as abordagens tradicionais (virtual e materializada) de abordagens de Big Data são os 7V: Volume, Velocidade, Variedade, Veracidade, Variabilidade, Valor e Visibilidade.
+Dessa forma, os conjuntos de dados passaram a ter tal tamanho e estrutura que excedem as capacidades das ferramentas de programação tradicionais para coleta, armazenamento e processamento de dados em um tempo razoável e por motivos de força maior, excedem a capacidade de sua percepção por um humano \cite{miloslavskaya2014information}. Esses fatos invibializa a abordagen materializada em um cenário de Big Data, visto que o esforço para a criação de extratores, mediadores, tradutores e demais componentes supramencionados é custoso.
+Os critérios que determinam a diferença entre as abordagens tradicionais (virtual e materializada) de abordagens de Big Data são os 7V: Volume, Velocidade, Variedade, Veracidade, Variabilidade, Valor e Visibilidade.
 
-\subsection{Data Warehouse}
-Data Warehouses são bancos de dados centralizados que requerem que seus esquemas sejam definidos previamente, visto que os dados devem ser compreendidos para em seguida passar pela etapa de ETL (extração, transformação e carga).
-
-\subsection{Data Lake}
 Uma tecnologia recente de Big Data que tem mostrado bons resultados são os Data Lakes.
 Um data lake é um repositório centralizado que permite armazenar todos os  dados estruturados, semiestruturados e não estruturados em qualquer escala. O armazenamento é feito no formato natural dos dados \cite{laskowski2016data}. Como exemplificado na figura \ref{fig3}, a preocupação é armazenar todos os dados, sem perda, para posterior exploração.
+O principal desafio dessa arquitetura é que os dados brutos são armazenados sem supervisão do conteúdo.
 
 \begin{figure}[!ht]
 \centering
@@ -41,21 +109,13 @@ Um data lake é um repositório centralizado que permite armazenar todos os  dad
 \end{figure}
 
 Um Data Lake possui as seguintes etapas:
-• Injeção de dados: Os Data Lakes permitem que importar qualquer quantidade de dados que possa vir em tempo real. Os dados são coletados de várias fontes e movidos para o lago de dados em seu formato original. Esse processo permite que você dimensione para dados de qualquer tamanho, economizando tempo de definição de estruturas de dados, esquemas e transformações.
+• Injeção de dados: Os Data Lakes permitem importar qualquer quantidade de dados que possa vir em tempo real. Os dados são coletados de várias fontes e movidos para o lago de dados em seu formato original. Esse processo permite que você dimensione para dados de qualquer tamanho, economizando tempo de definição de estruturas de dados, esquemas e transformações.
 • Armazenar: depois de recuperados, os dados precisam ser armazenados em um formato durável e facilmente acessível.
 • Processar e analisar: nessa etapa, os dados são transformados de brutos em informações acionáveis.
-• Explorar e visualizar: a etapa final é a de conversão dos resultados da análise em um formato que facilite a extração de informações e o compartilhamento com os colegas.
+• Explorar e visualizar: a etapa final é a de conversão dos resultados da análise em um formato que facilite a extração de informações e o compartilhamento.
 
-Note que mover os dados de um armazenamento em Data WareHouse ou outras abordagens para a abordagem "armazenar tudo" de um  Data Lake é útil somente se ainda for possível extrair conhecimento de todos os dados.
-Vale ressaltar que o principal desafio de uma arquitetura de Data Lake é que os dados brutos são armazenados sem supervisão do conteúdo.
+Note que mover os dados de um armazenamento em Data Warehouse ou outras abordagens para a abordagem "armazenar tudo" de um  Data Lake é útil somente se ainda for possível extrair conhecimento de todos os dados.
+
 existem várias ferramentas para data lake, como: Google Cloud Platform \ref{https://cloud.google.com/solutions/build-a-data-lake-on-gcp?hl=pt-br}{GCP}, \ref{https://aws.amazon.com/pt/big-data/datalakes-and-analytics/what-is-a-data-lake/?nc1=h_ls}{AWS}, \ref{https://azure.microsoft.com/pt-br/services/storage/data-lake-storage/}{Azure}.  Além de fornecer funcionalidades de Data Lake, estas ferramentas possibilitam o uso de mineração de dados, aprendizado de máquina e diversos outros recursos integrados.
-Neste trabalho, utilizaremos o \ref{https://drill.apache.org/}{Apache Drill} para integrar os dados, nos valendo do conceito já apresentado de Data Lake.
+Neste trabalho, utilizaremos o \ref{https://drill.apache.org/}{Apache Drill} para integrar os dados, nos valendo do conceito já apresentado de Data Lake e da integração virtualizada dos dados.
 
-\section{Record Linkage}
-
-O termo record linkage é usado para indicar o procedimento de reunir informações de dois ou mais registros que se acredita pertencerem à mesma entidade.
-Esse processo é usado para vincular dados de várias fontes de dados ou para encontrar duplicatas em uma única fonte de dados.
-Na ciência da computação, record linkage também é conhecido como data matching ou deduplication(no caso de registros duplicados de pesquisa em um único arquivo).
-Em record linkage, os atributos da entidade (armazenados em um registro) são usados para vincular dois ou mais registros.
-Atributos podem ser identificadores exclusivos da entidade como o código da pessoa física (CPF) ou o número do registro geral (RG), mas também existem atributos como nome, data de nascimento, modelo do carro e endereço que podem ser utilizados.
-O procedimento de record linkage pode ser representado como um fluxo de trabalho com as seguintes etapas: limpeza, indexação, comparação, classificação e avaliação. Se necessário, os pares de registros classificados fluem de volta para melhorar o passo anterior \cite{christen2012data}.
