@@ -1,0 +1,27 @@
+@startuml
+|Script|
+Start
+:Inicia o Apache Drill;
+:Configura o pydrill para se comunicar com o Apache Drill;
+:Submete uma consulta ao Apache Drill via pydrill;
+|Apache Drill|
+:Executa a consulta;
+|Script|
+:Pydrill captura o resultado da consulta;
+:Pydrill transforma o resultado em um Dataframe do Pandas;
+:Faz a limpesa dos dados via Record Linkage Toolkit;
+:Indexa os dados via Record Linkage Toolkit;
+:Compara os dados via Record Linkage Toolkit usando o indexer;
+:Calcula as probabilidades para cada par de candidatos;
+:Ddecide quais são os candidatos duplicados;
+:Armazena os dados dos pacientes sem duplicatas em um novo Dataframe do Pandas;
+:Cria uma View no Apache Drill usando o Dataframe da etapa anterior;
+:Submete as consultas relacionadas as questões de pesquisa, usando a view e os arquivos brutos;
+|Apache Drill|
+:Executa as consultas;
+|Script|
+:Processa os resultados;
+:Cria os gráficos para análise por meio do bokeh;
+:Exibe os gráficos para o pesquisador;
+Stop
+@enduml

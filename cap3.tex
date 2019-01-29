@@ -9,7 +9,7 @@ V.	Processar os dados.
 VI.	Gerar visualização dos resultados para as questões estabelecidas.
 
 O GAL tem suas funcionalidades limitadas por perfis de acesso, ou seja, na etapa de extração dos dados o pesquisador colaborador (especialista vinculado a FIOCRUZ) obteve somente dados provenientes dos laboratórios dessa instituição. Além disso, o sistema permite somente a exportação dos dados referentes a um período máximo de 3 meses, o que gerou vários arquivos (no formato CSV) que deveriam ser integrados. Cada um dos arquivos refere-se a solicitações ambulatoriais de pessoas suspeitas de terem contraído alguma doença, como zika. No entanto, nestas bases de dados a chave única (chave primária) é o número da solicitação e não um atributo que identifique os pacientes, dessa forma um problema a ser resolvido é a junção dos dados dos pacientes para que nas análises futuras as consultas possam ser respondidas sem duplicatas. Vale ressaltar também que muitas informações não são preenchidas corretamente, como o endereço, telefone, número da carteirinha do SUS e outros dados que poderiam facilitar a identificação dos pacientes.
-Na etapa seguinte, foram armazenados 9 arquivos relacionados a zika e outros 9 relacionados a Febre Amarela. Os atributos desses arquivos seguem na \ref{tab1}. Os campos usados para a etapa de integração e processamento (requisição, paciente, data do nascimento, sexo, data dos primeiros sintomas e data da coleta) estão discriminados nas linhas de cor cinza claro.
+Na etapa seguinte, foram armazenados 9 arquivos relacionados a zika e outros 9 relacionados a Febre Amarela. Os atributos desses arquivos seguem na \ref{tab1}. Os campos usados para a etapa de integração e processamento (requisição, paciente, data do nascimento, sexo, data dos primeiros sintomas e data da coleta) estão discriminados nas linhas de cor cinza claro. A quantidade de arquivos para cada doença deve-se ao fato da zika ter apresentado um surto entre 2015 e 2017, enquanto a febre amarela apresentou um surto de 2017 até 2018.
 
 \begin{table}
 \centering
@@ -136,17 +136,34 @@ Para integrar todos os arquivos, utilizamos o Apache Drill, que é um sistema di
 petabytes de dados espalhados por milhares de servidores, seu objetivo é responder a consultas ad-hoc em uma latência baixa.
 A arquitetura do drill possui basicamente 3 camadas: usuário, processamento e fonte de dados.
 A camada de usuário provê acesso aos dados por meio de interfaces (linha de comando, REST, API e drivers JDBC/ODBC). A camada de processamento permite plugar ou extender linguagens de consulta. Na camada dos dados, configura-se  o acesso as fontes de dado, local e/ou clusterizada. Essas fontes podem ser estruturadas, semiestruturadas ou não estruturadas. \cite{hausenblas2013apache}.
-Em nosso cenário, os arquivos são textuais no formato CSV, com campos fautantes como strings vazias. Além disso, os arquivos foram armazenados localmente. Esses fatores foram configurados em uma interface do próprio Apache Drill, para aceitar corretamente o formato e para endereçar os arquivos por meio do Sistema Padrão de Arquivos (DFS).
-
-V.	Traduzir as consultas para a linguagem do apache drill, SQL, seguindo sua sintaxe.
-VI.	Estabelecer o relacionamento, transformação e limpeza dos dados. 
-
-
-V.	exibir o resultado das consultas para o pesquisador por meio da visualização de dados.
+Em nosso cenário, os arquivos são textuais no formato CSV, cujo separador de atributos é o caracter ";" com campos fautantes como strings vazias. Além disso, os arquivos foram armazenados localmente. Esses fatores foram configurados em uma interface do próprio Apache Drill, para aceitar corretamente o formato e para endereçar os arquivos por meio do Sistema Padrão de Arquivos (DFS).
 
 As tarefas de manipulação dos dados na etapa de processamento dos dados foi feita na linguagem python por meio da biblioteca \ref{https://pandas.pydata.org/}{Pandas} e o pacote \ref{http://www.numpy.org/}{NumPy}, que juntas são atualmente algumas das ferramentas mais conhecidas e poderosas em data science.
-No Pandas, pudemos utilizar a estrutura de dados Dataframe para capturar a chave primária dos arquivos, todas as aparições dos nomes dos pacientes, seu respectivo gênero e data de nascimento. Esses dados foram processados por meio da biblioteca \ref{https://recordlinkage.readthedocs.io/en/latest/index.html}{Record Linkage Toolkit} para deduplicar os registros e identificar cada paciente.
+No Pandas, pudemos utilizar a estrutura de dados Dataframe para armazenar o caminho dos arquivos, a chave primária de cada tupla (número da requisição), todas as aparições dos nomes dos pacientes, seu respectivo gênero e data de nascimento. Esses dados foram processados por meio da biblioteca \ref{https://recordlinkage.readthedocs.io/en/latest/index.html}{Record Linkage Toolkit} para deduplicar os registros e identificar cada paciente.
+A obtenção dos dados e a subsequente transformação em um Dataframe como descrito anteriormente foi feita por meio da biblioteca \ref{https://pydrill.readthedocs.io/en/latest/}{pydrill}, que é uma abstração para python de comandos a serem enviados ao Apache Drill, facilitando o desenvolvimento.
+A identificação de duplicatas foi feita por meio de 3 etapas: limpesa dos dados, indexação e comparação.
 
-O Dataframe resultante das etapas de processamento dos dados contém como atributos: caminho do arquivo para a tupla, chave primária do arquivo, tempo de coleta para a requisição da respectiva tupla.
+O Dataframe resultante das etapas de processamento dos dados contém como atributos: caminho do arquivo para a tupla, chave primária do arquivo (número da requisição), código identificador (substitui as informações dos pacientes mantendo o anonimato) e tempo de coleta para a requisição da respectiva tupla.
 Esse Dataframe foi salvo por meio do Apache Drill em uma view permanente.
 Dessa forma é possível mapear as solicitações como pacientes únicos, ao aplicar consultas que utilizem a view e os arquivos textuais em seu formato bruto.
+O fluxo de trabalho da abordagem como um todo pode ser exemplificado na figura \ref{fig4}. A tarefa de executar consultas do Apache Drill possui um fluxo interno, da própria ferramenta, que é descrito abaixo e mostrado na figura \ref{fig5}.
+I. Um cliente do drill faz uma consulta. Um cliente Drill é um driver JDBC, ODBC, interface de linha de comandos ou uma API REST. Qualquer Drillbit (responsável por aceitar consultas vindas de clientes) em um cluster pode aceitar consultas. Não há conceito mestre-escravo.
+II. O Drillbit analisa a consulta, otimiza-a e gera um plano de consulta distribuído que é otimizado para uma execução rápida e eficiente.
+III. O Drillbit que aceita a consulta torna-se o nó Drillbit da solicitação. Ele obtém uma lista de nós Drillbit disponíveis no cluster do ZooKeeper. O Drillbit de direcionamento determina os nós apropriados para executar vários fragmentos do plano de consulta para maximizar a localidade dos dados.
+IV. O Drillbit programa a execução de fragmentos de consulta em nós individuais de acordo com o plano de execução.
+V. Os nós individuais concluem sua execução e retornam dados para o Drillbit de acionamento.
+VI. Os resultados são encaminhados para o cliente por meio de streams.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.3\linewidth]{figuras/wf_script.png}
+\caption{Fluxo de trabalho da abordagem proposta}
+\label{fig4}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.3\linewidth]{figuras/wf_drill.jpg}
+\caption{Fluxo interno de Consulta do Apache Drill, retirado de: https://drill.apache.org/architecture/}
+\label{fig5}
+\end{figure}
